@@ -41,7 +41,7 @@ namespace PokemonApp
         }
         public void LevelUp()
         {
-            if (this.Exp >= this.ExpToLevel)
+            while (this.Exp >= this.ExpToLevel)
             {
                 this.Level++;
                 this.Exp -= this.ExpToLevel;
