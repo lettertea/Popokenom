@@ -34,12 +34,14 @@ namespace PokemonApp
             }
             if (player.Hp <= 0)
             {
-                Console.WriteLine($"{player.Name} has fainted.");
-                }
+                Console.WriteLine($"{player.Name} fainted.");
+            }
             else
             {
-                Console.WriteLine($"{opponent.Name} has fainted.");
-                }
+                Console.WriteLine($"{opponent.Name} fainted.");
+                player.Exp += opponent.ExpReleased;
+                Console.WriteLine($"{player.Name} gained {opponent.ExpReleased} EXP!");
+            }
         }
 
     }
