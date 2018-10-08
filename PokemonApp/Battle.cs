@@ -11,7 +11,7 @@ namespace PokemonApp
             ConsoleKey response;
             do
             {
-                Console.Write("Fight? [y/n] ");
+                Console.Write("Fight? [y/n]: ");
                 response = Console.ReadKey(false).Key;
 
             } while (response != ConsoleKey.Y && response != ConsoleKey.N);
@@ -39,8 +39,7 @@ namespace PokemonApp
             else
             {
                 Console.WriteLine($"{opponent.Name} fainted.");
-                player.Exp += opponent.ExpReleased;
-                Console.WriteLine($"{player.Name} gained {opponent.ExpReleased} EXP!");
+                Console.WriteLine($"{player.Name} gained {player.GainExp(opponent)} EXP!");
             }
         }
 
