@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PokemonApp
 {
@@ -6,16 +7,20 @@ namespace PokemonApp
     {
         static void Main(string[] args)
         {
-            Pokemon pikachu = new Pokemon("Pikachu", 1000, 10);
-            Pokemon dude = new Pokemon("Dude", 9003, 10);
-            pikachu.Attack(ref dude);
-            if (Battle.Prompt())
+            List<Pokemon> userPokemons = new List<Pokemon> { new Pokemon("Mikachu", 78) };
+            int userInput = Menu.PromptChoices();
+            switch (userInput)
             {
-                Battle.Fight(ref pikachu, ref dude);
+                case 1:
+                    Menu.FightWildPokemon(ref userPokemons);
+                    break;
             }
 
-
         }
+
+
+
+
 
     }   
 }

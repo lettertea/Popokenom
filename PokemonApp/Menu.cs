@@ -6,28 +6,44 @@ namespace PokemonApp
 {
     class Menu
     {
-        public void PromptChoices()
+        public static int PromptChoices()
         {
-            Console.WriteLine("1. Fight wild Pokemons.");
-            if (int.TryParse(Console.ReadLine(), out int menuChoice))
+            int userInput;
+            do
             {
-                switch (menuChoice)
-                { case 1:
-                        Console.WriteLine("What level? [1-100]");
-                        if (int.TryParse(Console.ReadLine(), out int opponentLevel))
-                        {
-                            Pokemon opponent = new Pokemon(Pokemons.GetRandomPokemon(), opponentLevel);
-                        }
-                            break;
-
-
+                string[] options = { "Fight wild Pokemons", "Challenge gym leaders", "Shop", "Heal", "Save" };
+                for (int i = 0; i < options.Length; i++)
+                {
+                    string option = options[i];
+                    Console.WriteLine($"{i+1}. {option}");
                 }
 
-            }
-            else
-            {
-                Console.WriteLine("Invalid input.");
-            }
+                if (int.TryParse(Console.ReadLine(), out userInput))
+                {
+                    if (userInput >= 1 && userInput <= options.Length) {
+                        return userInput;
+                    }
+                }
+            } while (true);
         }
+
+        public static void FightWildPokemon(ref List<Pokemon> userPokemons)
+        {
+            int opponentLevel;
+            do
+            {
+                Console.WriteLine("Your opponent level?");
+                if (int.TryParse(Console.ReadLine(), out opponentLevel))
+                {
+                    if (opponentLevel >= 1 && opponentLevel <= 100)
+                    {
+                        Pokemon opponent = new Pokemon(Pokemons.GetRandomPokemon(), opponentLevel);
+                        Battle.Fight(ref userPokemons, ref opponent);
+                        break;
+                    }
+                }
+            } while (true);
+        }
+
     }
 }
