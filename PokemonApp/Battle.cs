@@ -2,28 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace PokemonApp
 {
     class Battle
     {
-        public static bool Prompt()
-        {
-            ConsoleKey response;
-            do
-            {
-                Console.Write("Fight? [y/n]: ");
-                response = Console.ReadKey(false).Key;
 
-            } while (response != ConsoleKey.Y && response != ConsoleKey.N);
-            if (response == ConsoleKey.Y)
-            {
-                return true;
-            }
-            else { Console.WriteLine("Have a good day!"); return false; }
-
-        }
-        public static void Fight(ref Pokemon player, ref Pokemon opponent)
+        public static void Fight(ref List<Pokemon> userPokemons, ref Pokemon opponent)
         {
+            Pokemon player = userPokemons[0];
             while (player.Hp > 0 && opponent.Hp > 0)
             {
                 player.Attack(ref opponent);
