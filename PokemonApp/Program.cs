@@ -7,16 +7,22 @@ namespace PokemonApp
     {
         static void Main(string[] args)
         {
-            List<Pokemon> userPokemons = new List<Pokemon> { new Pokemon("Mikachu", 78) };
-            int userInput = Menu.PromptChoices();
+            PokemonTrainer user = new PokemonTrainer();
+            user.GetStarterPokemon();
+            user.CaptivePokemons.Add(new Pokemon("Hia", 32));
+            string[] menuChoices = { "Fight wild Pokemons", "Challenge gym leaders", "Shop", "Heal", "Save" };
+            int userInput = Menu.GetUserInputIndex(menuChoices);
             switch (userInput)
             {
-                case 1:
-                    Menu.FightWildPokemon(ref userPokemons);
+                case 0:
+                    Menu.FightWildPokemon(ref user);
                     break;
             }
 
         }
+
+
+
 
 
 
