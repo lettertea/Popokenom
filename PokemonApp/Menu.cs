@@ -6,28 +6,29 @@ namespace PokemonApp
 {
     class Menu
     {
-        public static int PromptChoices()
+        public static int GetUserInputIndex(string[] options)
         {
-            int userInput;
+            int userInputIndex;
             do
             {
-                string[] options = { "Fight wild Pokemons", "Challenge gym leaders", "Shop", "Heal", "Save" };
                 for (int i = 0; i < options.Length; i++)
                 {
                     string option = options[i];
-                    Console.WriteLine($"{i+1}. {option}");
+                    Console.WriteLine($"{i + 1}. {option}");
                 }
 
-                if (int.TryParse(Console.ReadLine(), out userInput))
+                if (int.TryParse(Console.ReadLine(), out userInputIndex))
                 {
-                    if (userInput >= 1 && userInput <= options.Length) {
-                        return userInput;
+                    if (userInputIndex >= 1 && userInputIndex <= options.Length)
+                    {
+                        return userInputIndex-1;
                     }
+                    Console.WriteLine("Try again");
                 }
             } while (true);
         }
 
-        public static void FightWildPokemon(ref List<Pokemon> userPokemons)
+        public static void FightWildPokemon(ref PokemonTrainer userPokemons)
         {
             int opponentLevel;
             do
