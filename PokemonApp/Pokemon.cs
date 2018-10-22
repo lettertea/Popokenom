@@ -9,7 +9,20 @@ namespace PokemonApp
         public double Rarity { get; private set; }
         public string Name { get; set; }
         public int Hp { get; set; }
-        public int Level { get; set; }
+        private int _level;
+        public int Level
+        {
+            get { return _level; }
+            set
+            {
+                if (value < 1 || value > 100) {
+                    //Console.WriteLine("Level out of bound. Must be an integer from 1-100");
+                    throw new ArgumentOutOfRangeException("Level must be from 1 to 100");
+                }
+                _level = value;
+                
+            }
+        }
         public int Exp { get; set; }
         public int ExpToLevel => (int)Math.Round(Math.Pow(this.Level / .17, 2), 0);
         public int ExpReleased => (int)Math.Round((this.ExpToLevel / (.1 * Math.Pow(this.Level, 1.3) + 1) * (this.Rarity)), 0); // expression bodied property
