@@ -18,7 +18,7 @@ namespace PokemonApp
 
         public int Money { get; set; }
         public int MoneyDropped { get; set; }
-        public List<string> Items { get; set; }
+        public List<Item> Items { get; } = new List<Item>();
 
 
         public void GetStarterPokemon()
