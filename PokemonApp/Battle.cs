@@ -25,6 +25,10 @@ namespace PokemonApp
                         ChangePokemon(ref userPokemon, ref userTrainer, ref opponent);
                         break;
                     case 2:
+                        InteractWithItems(ref userPokemon, ref userTrainer, ref opponent);
+                        break;
+
+                    
 
                 }
 
@@ -75,6 +79,24 @@ namespace PokemonApp
                 opponent.Attack(ref userPokemon);
                 Console.WriteLine($"{userPokemon.Name} Hp lowers to {userPokemon.Hp}.");
             }
+        }
+
+        public static void InteractWithItems(ref Pokemon userPokemon, ref PokemonTrainer userTrainer, ref Pokemon opponent)
+        {
+            List<string> userItems = new List<string>();
+
+            for (int i = 0; i < userTrainer.Items.Count; i++)
+            {
+                string itemName = userTrainer.Items[i].Name;
+                userItems.Add($"{i + 1}. {itemName}");
+            }
+            int userInputIndex = Menu.GetUserInputIndex(userItems, true);
+
+            if (userInputIndex == -1) { return; }
+            Item itemChosen = userTrainer.Items[userInputIndex];
+            if (itemChosen.PokemonAffected == "user") { userTrainer.Items[userInputIndex].Use(ref userPokemon, ref userTrainer); }
+            else { userTrainer.Items[userInputIndex].Use(ref opponent, ref userTrainer); }
+
         }
     }
 }
