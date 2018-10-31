@@ -9,12 +9,6 @@ namespace PokemonApp
 
         public List<Pokemon> CaptivePokemons { get; } = new List<Pokemon>();
 
-        public void AddCaptivePokemons(Pokemon caughtPokemon)
-        {
-
-            this.CaptivePokemons.Add(caughtPokemon);
-        }
-
 
         public int Money { get; set; }
         public int MoneyDropped { get; set; }
@@ -32,9 +26,10 @@ namespace PokemonApp
             }
             int userInputIndex = Menu.GetUserInputIndex(pokemonChoices.ToArray());
             string pokemonChosen = pokemonChoices[userInputIndex];
-            this.AddCaptivePokemons(new Pokemon(pokemonChosen, 1));
+            this.CaptivePokemons.Add(new Pokemon(pokemonChosen, 1));
             Console.WriteLine($"Congratulations! {pokemonChosen} joined your party.");
         }
+
     }
 
 
