@@ -8,13 +8,13 @@ namespace PokemonApp
     class Battle
     {
 
-        public static void Fight(ref PokemonTrainer userPokemons, ref Pokemon opponent)
+        public static void Fight(ref PokemonTrainer userTrainer, ref Pokemon opponent)
         {
-            Pokemon userPokemon = userPokemons.CaptivePokemons[0];
-            string[] menuChoices = { "Attack", "Change Popokenom", "Item", "Run" };
+            Pokemon userPokemon = userTrainer.CaptivePokemons[0];
+            List<string> menuChoices = new List<string> { "Attack", "Change Popokenom", "Item", "Run" };
             while (userPokemon.Hp > 0 && opponent.Hp > 0)
             {
-                int userInputIndex = Menu.GetUserInputIndex(menuChoices);
+                int userInputIndex = Menu.GetUserInputIndex(menuChoices, false);
                 switch (userInputIndex)
                 {
                     case 0:
@@ -22,7 +22,7 @@ namespace PokemonApp
                         break;
 
                     case 1:
-                        ChangePokemon(ref userPokemon, ref userPokemons, ref opponent);
+                        ChangePokemon(ref userPokemon, ref userTrainer, ref opponent);
                         break;
                     case 2:
 
@@ -48,28 +48,24 @@ namespace PokemonApp
             Console.WriteLine(userPokemon.Hp);
             Console.WriteLine(opponent.Hp);
         }
-        public static void ChangePokemon(ref Pokemon userPokemon, ref PokemonTrainer userPokemons, ref Pokemon opponent)
+        public static void ChangePokemon(ref Pokemon userPokemon, ref PokemonTrainer userTrainer, ref Pokemon opponent)
         {
             List<string> userChoices = new List<string>();
-            int i;
-            for (i = 0;  i < userPokemons.CaptivePokemons.Count; i++)
+            for (int i = 1; i < userTrainer.CaptivePokemons.Count; i++)
             {
-                Pokemon pokemon = userPokemons.CaptivePokemons[i];
-                userChoices.Add($"{i + 1}. {pokemon.Name} - Level: {pokemon.Level}, Hp: {pokemon.Hp}");
+                Pokemon pokemon = userTrainer.CaptivePokemons[i];
+                userChoices.Add($"{pokemon.Name} - Level: {pokemon.Level}, Hp: {pokemon.Hp}");
             }
-            int cancelIndex = i;
-            userChoices.Add($"{cancelIndex + 1}. Cancel");
-            int userInputIndex = Menu.GetUserInputIndex(userChoices.ToArray());
 
-            if (userInputIndex == i) { return; }
+            int userInputIndex = Menu.GetUserInputIndex(userChoices, true);
+
+            if (userInputIndex == -1) { return; }
             Console.WriteLine($"Come back {userPokemon.Name}.");
-            if (userPokemon == userPokemons.CaptivePokemons[userInputIndex])
-            {
-                Console.WriteLine($"Wait—I didn't mean that. Get back out there, {userPokemon.Name}");
-            } else { 
-            userPokemon = userPokemons.CaptivePokemons[userInputIndex];
+
+            userPokemon = userTrainer.CaptivePokemons[userInputIndex];
             Console.WriteLine($"I choose you, {userPokemon.Name}.");
-            }
+            
+
             Random rand = new Random();
             if (rand.Next(0, 2) == 0) {
                 Console.WriteLine($"{opponent.Name} waits for you to get ready.");
@@ -77,7 +73,7 @@ namespace PokemonApp
             else {
                 Console.WriteLine($"{opponent.Name} doesn't care and attacks!");
                 opponent.Attack(ref userPokemon);
-                Console.WriteLine($"{opponent.Name} is now at {userPokemon.Hp} Hp.");
+                Console.WriteLine($"{userPokemon.Name} Hp lowers to {userPokemon.Hp}.");
             }
         }
     }
