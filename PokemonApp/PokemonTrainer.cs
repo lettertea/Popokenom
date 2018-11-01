@@ -24,7 +24,7 @@ namespace PokemonApp
                 string randomPokemon = Pokemons.GetRandomPokemon();
                 pokemonChoices.Add(randomPokemon);
             }
-            int userInputIndex = Menu.GetUserInputIndex(pokemonChoices.ToArray());
+            int userInputIndex = Menu.GetUserInputIndex(pokemonChoices, false);
             string pokemonChosen = pokemonChoices[userInputIndex];
             this.CaptivePokemons.Add(new Pokemon(pokemonChosen, 1));
             Console.WriteLine($"Congratulations! {pokemonChosen} joined your party.");
