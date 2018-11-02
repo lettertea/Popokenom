@@ -16,7 +16,10 @@ namespace PokemonApp
         public override void Use(ref Pokemon userPokemon, ref PokemonTrainer userTrainer)
         {
             userTrainer.Items.Remove(this);
-            userPokemon.Hp += (int)Math.Round((userPokemon.MaxHp * this.HpIncrease));
+            int HpIncreased = (int)Math.Round((userPokemon.MaxHp * this.HpIncrease));
+            if (userPokemon.Hp + HpIncreased > userPokemon.MaxHp) { HpIncreased = userPokemon.MaxHp - userPokemon.Hp; }
+            userPokemon.Hp += HpIncreased;
+            Console.WriteLine($"{userPokemon} recovered {HpIncreased} Hp to {userPokemon.Hp}");
         }
     }
 }
