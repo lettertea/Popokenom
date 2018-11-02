@@ -23,16 +23,15 @@ namespace PokemonApp
                     case 0:
                         Attack(ref userPokemon, ref opponent);
                         break;
-
                     case 1:
                         ChangePokemon(ref userPokemon, ref userTrainer, ref opponent);
                         break;
                     case 2:
                         InteractWithItems(ref userPokemon, ref userTrainer, ref opponent);
                         break;
-
-
-
+                    case 3:
+                        if (Run(ref userPokemon, ref opponent)) { return; };
+                        break;
                 }
 
             }
@@ -113,5 +112,17 @@ namespace PokemonApp
             OpponentMightAttack(ref userPokemon, ref opponent);
 
         }
+        public static bool Run(ref Pokemon userPokemon, ref Pokemon opponent)
+        {
+            if (userPokemon.Hp >= opponent.Hp)
+            {
+                Console.WriteLine($"{userPokemon.Name} fled the scene.");
+                return true;
+            }
+            Console.WriteLine($"{opponent.Name} stops you.");
+            OpponentMightAttack(ref userPokemon, ref opponent);
+            return false;
+        }
+
     }
 }
