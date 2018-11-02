@@ -26,6 +26,22 @@ namespace PokemonApp
             Console.WriteLine($"Congratulations! {pokemonChosen} joined your party.");
         }
 
+        public void SwapPokemons(int indexA, int indexB)
+        {
+            Pokemon cache = this.CaptivePokemons[indexA];
+            CaptivePokemons[indexA] = this.CaptivePokemons[indexB];
+            this.CaptivePokemons[indexB] = cache;
+        }
+
+        public static bool allPokemonsFainted(PokemonTrainer userTrainer)
+        {
+            foreach (Pokemon userPokemon in userTrainer.CaptivePokemons)
+            {
+                if (userPokemon.Hp >= 0) { return false; }
+            }
+            return true;
+        }
+
     }
 
 

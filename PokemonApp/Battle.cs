@@ -13,8 +13,10 @@ namespace PokemonApp
         {
             Pokemon userPokemon = userTrainer.CaptivePokemons[0];
             List<string> menuChoices = new List<string> { "Attack", "Change Popokenom", "Item", "Run" };
-            while (opponent.Hp > 0 && !allUserPokemonsFainted(userTrainer))
+            while (opponent.Hp > 0 && !PokemonTrainer.allPokemonsFainted(userTrainer))
             {
+                if (userPokemon.Hp <= 0) { ChangePokemon(ref userPokemon, ref userTrainer, ref opponent); }
+
                 int userInputIndex = Menu.GetUserInputIndex(menuChoices, false);
                 switch (userInputIndex)
                 {
@@ -45,14 +47,7 @@ namespace PokemonApp
             }
         }
 
-        public static bool allUserPokemonsFainted(PokemonTrainer userTrainer)
-        {
-            foreach (Pokemon userPokemon in userTrainer.CaptivePokemons)
-            {
-                if (userPokemon.Hp <= 0) { return true; }
-            }
-            return false;
-        }
+
 
         public static void Attack(ref Pokemon userPokemon, ref Pokemon opponent)
         {
