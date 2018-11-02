@@ -15,17 +15,14 @@ namespace PokemonApp
             get { return _level; }
             set
             {
-                if (value < 1 || value > 100) {
-                    //Console.WriteLine("Level out of bound. Must be an integer from 1-100");
-                    throw new ArgumentOutOfRangeException("Level must be from 1 to 100");
-                }
+                if (value < 1 || value > 100) { throw new ArgumentOutOfRangeException("Level must be from 1 to 100"); }
                 _level = value;
                 
             }
         }
         public int Exp { get; set; }
         public int ExpToLevel => (int)Math.Round(Math.Pow(this.Level / .17, 2), 0);
-        public int ExpReleased => (int)Math.Round((this.ExpToLevel / (.1 * Math.Pow(this.Level, 1.3) + 1) * (this.Rarity)), 0); // expression bodied property
+        public int ExpReleased => (int)Math.Round((this.ExpToLevel / (.1 * Math.Pow(this.Level, 1.3) + 1) * (this.Rarity)), 0);
         public int MaxHp => (int)Math.Round(((this.Level * 10) * Math.Pow(.2 * this.Level + 1, 1.17) * this.Rarity), 0);
         public int BaseAttack => (int)Math.Round(this.MaxHp / 3.0, 0);
         public double CaptureProbability => (double)this.Hp/this.MaxHp; 

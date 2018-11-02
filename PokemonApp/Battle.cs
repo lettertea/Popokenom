@@ -28,7 +28,7 @@ namespace PokemonApp
                         InteractWithItems(ref userPokemon, ref userTrainer, ref opponent);
                         break;
 
-                    
+
 
                 }
 
