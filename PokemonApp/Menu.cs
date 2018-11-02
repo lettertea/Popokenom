@@ -30,7 +30,26 @@ namespace PokemonApp
             } while (true);
         }
 
-        public static void FightWildPokemon(ref PokemonTrainer userPokemons)
+        public static void FightWildPokemon(PokemonTrainer userPokemons)
+        {
+            int opponentLevel;
+            do
+            {
+                Console.WriteLine("Your opponent level?");
+                if (int.TryParse(Console.ReadLine(), out opponentLevel))
+                {
+                    if (opponentLevel >= 1 && opponentLevel <= 100)
+                    {
+                        Pokemon opponent = new Pokemon(PokemonStore.GetRandomPokemon(), opponentLevel);
+                        Console.WriteLine($"A wild {opponent.Name} appeared.");
+                        Battle.Fight(ref userPokemons, ref opponent);
+                        break;
+                    }
+                }
+            } while (true);
+        }
+
+        public static void ChallengeRival(PokemonTrainer userPokemons)
         {
             int opponentLevel;
             do
