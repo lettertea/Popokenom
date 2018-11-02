@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 
 namespace PokemonApp
@@ -12,7 +13,7 @@ namespace PokemonApp
         {
             Pokemon userPokemon = userTrainer.CaptivePokemons[0];
             List<string> menuChoices = new List<string> { "Attack", "Change Popokenom", "Item", "Run" };
-            while (userPokemon.Hp > 0 && opponent.Hp > 0)
+            while (opponent.Hp > 0 || allUserPokemonsFainted(userTrainer))
             {
                 int userInputIndex = Menu.GetUserInputIndex(menuChoices, false);
                 switch (userInputIndex)
@@ -33,15 +34,24 @@ namespace PokemonApp
                 }
 
             }
-            if (userPokemon.Hp <= 0)
-            {
-                Console.WriteLine($"{userPokemon.Name} fainted.");
-            }
-            else
+            if (opponent.Hp <= 0)
             {
                 Console.WriteLine($"{opponent.Name} fainted.");
                 Console.WriteLine($"{userPokemon.Name} gained {userPokemon.GainExp(opponent)} EXP!");
             }
+            else
+            {
+                Console.WriteLine($"{userPokemon.Name} fainted.");
+            }
+        }
+
+        public static bool allUserPokemonsFainted(PokemonTrainer userTrainer)
+        {
+            foreach (Pokemon userPokemon in userTrainer.CaptivePokemons)
+            {
+                if (userPokemon.Hp <= 0) { return true; }
+            }
+            return false;
         }
 
         public static void Attack(ref Pokemon userPokemon, ref Pokemon opponent)
