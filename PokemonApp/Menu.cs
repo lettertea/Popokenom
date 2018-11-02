@@ -28,7 +28,7 @@ namespace PokemonApp
                 if (int.TryParse(Console.ReadLine(), out int userInput))
                 {
                     userInputIndex = userInput - 1;
-                    if (userInputIndex >= 0 && userInput < options.Count)
+                    if (userInputIndex >= 0 && userInputIndex < options.Count)
                     {
                         return userInputIndex == cancelIndex ? -1 : userInputIndex;
                     }
