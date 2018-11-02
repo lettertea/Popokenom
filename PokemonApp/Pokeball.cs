@@ -17,6 +17,11 @@ namespace PokemonApp
 
         public override void Use(ref Pokemon opponent, ref PokemonTrainer userTrainer)
         {
+            if (userTrainer.CaptivePokemons.Count >= 6 )
+            {
+                Console.WriteLine("You have too many pokemons.");
+                return;
+            }
             userTrainer.Items.Remove(this);
             double captureProbability = (double)(this.Effectiveness * opponent.CaptureProbability);
             Random rand = new Random();
