@@ -62,6 +62,22 @@ namespace PokemonApp
             Console.WriteLine(userPokemon.Hp);
             Console.WriteLine(opponent.Hp);
         }
+
+        public static void OpponentMightAttack(ref Pokemon userPokemon, ref Pokemon opponent)
+        {
+            Random rand = new Random();
+            if (rand.Next(0, 2) == 0)
+            {
+                Console.WriteLine($"{opponent.Name} waits for you to get ready.");
+            }
+            else
+            {
+                Console.WriteLine($"{opponent.Name} doesn't care and attacks!");
+                opponent.Attack(ref userPokemon);
+                Console.WriteLine($"{userPokemon.Name} Hp lowers to {userPokemon.Hp}.");
+            }
+        }
+
         public static void ChangePokemon(ref Pokemon userPokemon, ref PokemonTrainer userTrainer, ref Pokemon opponent)
         {
             List<string> userChoices = new List<string>();
@@ -78,17 +94,8 @@ namespace PokemonApp
 
             userPokemon = userTrainer.CaptivePokemons[userInputIndex];
             Console.WriteLine($"I choose you, {userPokemon.Name}.");
-            
 
-            Random rand = new Random();
-            if (rand.Next(0, 2) == 0) {
-                Console.WriteLine($"{opponent.Name} waits for you to get ready.");
-            }
-            else {
-                Console.WriteLine($"{opponent.Name} doesn't care and attacks!");
-                opponent.Attack(ref userPokemon);
-                Console.WriteLine($"{userPokemon.Name} Hp lowers to {userPokemon.Hp}.");
-            }
+            OpponentMightAttack(ref userPokemon, ref opponent);
         }
 
         public static void InteractWithItems(ref Pokemon userPokemon, ref PokemonTrainer userTrainer, ref Pokemon opponent)
@@ -106,6 +113,8 @@ namespace PokemonApp
             Item itemChosen = userTrainer.Items[userInputIndex];
             if (itemChosen.PokemonAffected == "user") { userTrainer.Items[userInputIndex].Use(ref userPokemon, ref userTrainer); }
             else { userTrainer.Items[userInputIndex].Use(ref opponent, ref userTrainer); }
+
+            OpponentMightAttack(ref userPokemon, ref opponent);
 
         }
     }
