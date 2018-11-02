@@ -35,7 +35,7 @@ namespace PokemonApp
             this.Name = name;
             this.Level = level;
             this.Rarity = .80 + (1.3 - .80) * Math.Pow(rand.NextDouble(), 1.75); // Bias distribution to lower rarity value
-            if (this.Name == "Goldeen") { this.Rarity += .3; }
+            if (this.Name == "Magikarp") { this.Rarity += .3; }
             this.Hp = this.MaxHp;
             this.Exp = 0;
         }
