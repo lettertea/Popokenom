@@ -47,7 +47,7 @@ namespace PokemonApp
                 {
                     if (opponentLevel >= 1 && opponentLevel <= 100)
                     {
-                        Pokemon opponent = new Pokemon(Pokemons.GetRandomPokemon(), opponentLevel);
+                        Pokemon opponent = new Pokemon(PokemonStore.GetRandomPokemon(), opponentLevel);
                         Console.WriteLine($"A wild {opponent.Name} appeared.");
                         Battle.Fight(ref userPokemons, ref opponent);
                         break;

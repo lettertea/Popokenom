@@ -7,7 +7,7 @@ using Console = Colorful.Console;
 
 namespace PokemonApp
 {
-    class Pokemons
+    class PokemonStore
     {
         public static string GetRandomPokemon()
         {
@@ -17,6 +17,9 @@ namespace PokemonApp
             string randomPokemon = pokemons[randomPokemonIndex];
             return randomPokemon;
         }
+
+
+
 
     }
 }
