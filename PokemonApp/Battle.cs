@@ -51,10 +51,10 @@ namespace PokemonApp
         public static void Attack(ref Pokemon userPokemon, ref Pokemon opponent)
         {
             userPokemon.Attack(ref opponent);
+            Console.WriteLine($"{opponent.Name} Hp drops to {opponent.Hp}.");
+            if (opponent.Hp <= 0) { return; }
             opponent.Attack(ref userPokemon);
-            Console.WriteLine();
-            Console.WriteLine(userPokemon.Hp);
-            Console.WriteLine(opponent.Hp);
+            Console.WriteLine($"{userPokemon.Name} Hp drops to {userPokemon.Hp}.");
         }
 
         public static void OpponentMightAttack(ref Pokemon userPokemon, ref Pokemon opponent)
