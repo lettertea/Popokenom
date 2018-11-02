@@ -17,15 +17,11 @@ namespace PokemonApp
 
         public void GetStarterPokemon()
         {
-            Console.WriteLine("Choose your starter pokemon!");
-            List<string> pokemonChoices = new List<string>();
-            for (int i = 0; i < 5; i++)
-            {
-                string randomPokemon = Pokemons.GetRandomPokemon();
-                pokemonChoices.Add(randomPokemon);
-            }
-            int userInputIndex = Menu.GetUserInputIndex(pokemonChoices, false);
-            string pokemonChosen = pokemonChoices[userInputIndex];
+            Console.WriteLine("Choose your starter popokénom!");
+            Console.WriteLine();
+            List<string> starterPokemons = new List<string> { "Bulbasaur", "Charmander", "Squirtle" };
+            int userInputIndex = Menu.GetUserInputIndex(starterPokemons, false);
+            string pokemonChosen = starterPokemons[userInputIndex];
             this.CaptivePokemons.Add(new Pokemon(pokemonChosen, 1));
             Console.WriteLine($"Congratulations! {pokemonChosen} joined your party.");
         }
