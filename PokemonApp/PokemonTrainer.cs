@@ -9,10 +9,15 @@ namespace PokemonApp
 
         public List<Pokemon> CaptivePokemons { get; } = new List<Pokemon>();
 
-
+        public string Name { get; set; }
         public int Money { get; set; }
         public int MoneyDropped { get; set; }
         public List<Item> Items { get; } = new List<Item>();
+
+        public PokemonTrainer (string Name)
+        {
+            this.Name = Name;
+        }
 
         public void SwapPokemons(int indexA, int indexB)
         {
@@ -29,6 +34,8 @@ namespace PokemonApp
             }
             return true;
         }
+
+
 
     }
 

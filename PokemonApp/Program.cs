@@ -7,8 +7,9 @@ namespace PokemonApp
     {
         static void Main(string[] args)
         {
-            IntroduceGame();
-            PokemonTrainer userTrainer = new PokemonTrainer();
+            PokemonTrainer userTrainer = new PokemonTrainer(GetUserName());
+            IntroduceGame(userTrainer);
+
             GetStarterPokemon(userTrainer);
             userTrainer.CaptivePokemons.Add(new Pokemon("Hia", 32));
             List<string> menuChoices = new List<string> { "Fight wild Pokemons", "Challenge Rival", "Shop", "Heal", "Save" };
@@ -23,13 +24,19 @@ namespace PokemonApp
 
         }
 
-        private static void IntroduceGame() {
-            Console.WriteLine("Hello there! My name is not Nashkenazy, and this game might be called Popokénom.");
+        private static void IntroduceGame(PokemonTrainer userTrainer) {
+            Console.WriteLine($"Hello there, {userTrainer.Name}! My name is not Nashkenazy, and this game might be called Popokénom.");
             Console.WriteLine("You'll notice that I put very little effort in making this game good.");
             Console.WriteLine("A Magikarp can be much stronger than Mew.");
             Console.WriteLine("In fact, it is the strongest Popokénom in this game.");
             Console.WriteLine("With that said, have fun!");
             Console.WriteLine();
+        }
+
+        private static string GetUserName()
+        {
+            Console.WriteLine("Hi, what's your name?");
+            return Console.ReadLine();
         }
 
         private static void GetStarterPokemon(PokemonTrainer userTrainer)
