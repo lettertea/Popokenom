@@ -87,7 +87,8 @@ namespace PokemonApp
             if (userInputIndex == -1) { return; }
             Console.WriteLine($"Come back {userPokemon.Name}.");
 
-            userPokemon = userTrainer.CaptivePokemons[userInputIndex];
+            userTrainer.SwapPokemons(0, userInputIndex);
+            userPokemon = userTrainer.CaptivePokemons[userInputIndex + 1]; // Add one because current pokemon on field is not counted.
             Console.WriteLine($"I choose you, {userPokemon.Name}.");
 
             OpponentMightAttack(ref userPokemon, ref opponent);
