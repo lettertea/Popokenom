@@ -8,10 +8,9 @@ namespace PokemonApp
     {
         public static int GetUserInputIndex(List<string> options, bool cancel)
         {
-            int userInputIndex;
+            if (cancel) { options.Add("Cancel"); }
             do
             {
-                if (cancel) { options.Add("Cancel"); }
                 for (int i = 0; i < options.Count; i++)
                 {
                     string option = options[i];
@@ -20,7 +19,7 @@ namespace PokemonApp
 
                 if (int.TryParse(Console.ReadLine(), out int userInput))
                 {
-                    userInputIndex = userInput - 1;
+                    int userInputIndex = userInput - 1;
                     if (userInputIndex >= 0 && userInputIndex < options.Count)
                     {
                         if (cancel && userInputIndex == options.Count - 1) { return -1; }
