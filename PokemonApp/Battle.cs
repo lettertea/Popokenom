@@ -13,7 +13,7 @@ namespace PokemonApp
         {
             Pokemon userPokemon = userTrainer.CaptivePokemons[0];
             List<string> menuChoices = new List<string> { "Attack", "Change Popokenom", "Item", "Run" };
-            while (opponent.Hp > 0 && !PokemonTrainer.allPokemonsFainted(userTrainer))
+            while (opponent.Hp > 0 && !PokemonTrainer.AllPokemonsFainted(userTrainer))
             {
                 if (userPokemon.Hp <= 0) { ChangePokemon(ref userPokemon, ref userTrainer, ref opponent); }
 

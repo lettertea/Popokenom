@@ -27,7 +27,7 @@ namespace PokemonApp
             this.CaptivePokemons[indexB] = cache;
         }
 
-        public static bool allPokemonsFainted(PokemonTrainer userTrainer)
+        public static bool AllPokemonsFainted(PokemonTrainer userTrainer)
         {
             foreach (Pokemon userPokemon in userTrainer.CaptivePokemons)
             {
