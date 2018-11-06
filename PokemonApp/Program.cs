@@ -46,8 +46,11 @@ namespace PokemonApp
             Console.WriteLine("Choose your starter popokénom!");
             Console.WriteLine();
             List<string> starterPokemons = new List<string> { "Bulbasaur", "Charmander", "Squirtle" };
+
             int userInputIndex = Menu.GetUserInputIndex(starterPokemons, false);
             string pokemonChosen = starterPokemons[userInputIndex];
+
+            userTrainer.StarterPokemon = pokemonChosen;
             userTrainer.CaptivePokemons.Add(new Pokemon(pokemonChosen, 1));
             Console.WriteLine($"Congratulations! {pokemonChosen} joined your party.");
         }

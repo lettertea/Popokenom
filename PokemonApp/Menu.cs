@@ -52,24 +52,25 @@ namespace PokemonApp
 
         public static void ChallengeRival(PokemonTrainer userTrainer)
         {
-            PokemonTrainer rival = new PokemonTrainer("Bary");
+            PokemonTrainer rival = new RivalTrainer("Bary");
             List<string> userChoices = new List<string>();
 
             for (int i = 1; i < 11; i++)
             {
                 double timePassed = .25 * Math.Pow(i, 1.9);
                 int yearsPassed = (int)timePassed;
-                int remainingMonths = (int)((timePassed - yearsPassed)*12);
-                string monthName = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(remainingMonths+1);
+                int remainingMonths = (int)((timePassed - yearsPassed) * 12);
+                string monthName = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(remainingMonths + 1);
 
-                userChoices.Add($"Bary Yoke of {monthName} in the year {2000 + yearsPassed}");
+                userChoices.Add($"Bary Yoke in {monthName}, {2000 + yearsPassed}");
             }
 
             int userInputIndex = Menu.GetUserInputIndex(userChoices, true);
-
             if (userInputIndex == -1) { return; }
 
-        }
+            RivalTrainer.SetRivalPokemons(userTrainer.StarterPokemon, rival, userInputIndex);
 
+
+        }
     }
 }

@@ -8,6 +8,7 @@ namespace PokemonApp
     {
 
         public List<Pokemon> CaptivePokemons { get; } = new List<Pokemon>();
+        public string StarterPokemon { get; set; }
 
         public string Name { get; set; }
         public int Money { get; set; }
