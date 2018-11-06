@@ -21,8 +21,8 @@ namespace PokemonApp
             }
         }
         public int Exp { get; set; }
-        public int ExpToLevel => (int)Math.Pow(this.Level / .17, 2);
-        public int ExpReleased => (int)(this.ExpToLevel / (.1 * Math.Pow(this.Level, 1.3) + 1) * (this.Rarity));
+        public int ExpToLevel => (int)(Math.Pow(this.Level +1, 3)/2.8);
+        public int ExpReleased => (int)(this.ExpToLevel / (.1*(Math.Pow(this.Level, 1.3) + 1)) * this.Rarity);
         public int MaxHp => (int)((this.Level * 10) * Math.Pow(.2 * this.Level + 1, 1.17) * this.Rarity);
         public int BaseAttack => this.MaxHp / 3;
         public double CaptureProbability => (double)this.Hp/this.MaxHp; 
