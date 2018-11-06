@@ -18,7 +18,10 @@ namespace PokemonApp
                 case 0:
                     Menu.FightWildPokemon(userTrainer);
                     break;
-
+                case 1:
+                    Menu.ChallengeRival(userTrainer);
+                    break;
+                
             }
 
         }
