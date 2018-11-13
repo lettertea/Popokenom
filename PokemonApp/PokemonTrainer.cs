@@ -8,6 +8,7 @@ namespace PokemonApp
     {
 
         public List<Pokemon> CaptivePokemons { get; } = new List<Pokemon>();
+        public Pokemon PokemonOut => this.CaptivePokemons[0];
         public string StarterPokemon { get; set; }
 
         public string Name { get; set; }
@@ -23,7 +24,7 @@ namespace PokemonApp
         public void SwapPokemons(int indexA, int indexB)
         {
             Pokemon cache = this.CaptivePokemons[indexA];
-            CaptivePokemons[indexA] = this.CaptivePokemons[indexB];
+            this.CaptivePokemons[indexA] = this.CaptivePokemons[indexB];
             this.CaptivePokemons[indexB] = cache;
         }
 

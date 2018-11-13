@@ -11,7 +11,6 @@ namespace PokemonApp
 
         public static void FightPokemon(PokemonTrainer userTrainer, Pokemon opponent)
         {
-            Pokemon userPokemon = userTrainer.CaptivePokemons[0];
 
             List<string> menuChoices = new List<string> { "Attack", "Change Popokenom", "Item", "Run" };
             while (opponent.Hp > 0 && !userTrainer.AllPokemonsFainted())
@@ -22,7 +21,7 @@ namespace PokemonApp
                 switch (userInputIndex)
                 {
                     case 0:
-                        Attack(userPokemon, opponent);
+                        Attack(userTrainer.PokemonOut, opponent);
                         break;
                     case 1:
                         Pokemon initialPokemon = userTrainer.PokemonOut;
@@ -31,10 +30,10 @@ namespace PokemonApp
                         OpponentMightAttack(userTrainer.PokemonOut, opponent);
                         break;
                     case 2:
-                        InteractWithItems(userPokemon, userTrainer, opponent);
+                        InteractWithItems(userTrainer.PokemonOut, userTrainer, opponent);
                         break;
                     case 3:
-                        if (Run(userPokemon, opponent)) { return; };
+                        if (Run(userTrainer.PokemonOut, opponent)) { return; };
                         break;
                 }
 
@@ -42,31 +41,28 @@ namespace PokemonApp
             if (opponent.Hp <= 0)
             {
                 Console.WriteLine($"{opponent.Name} fainted.");
-                Console.WriteLine($"{userPokemon.Name} gained {userPokemon.GainExp(opponent)} EXP!");
+                Console.WriteLine($"{userTrainer.PokemonOut.Name} gained {userTrainer.PokemonOut.GainExp(opponent)} EXP!");
             }
             else
             {
-                Console.WriteLine($"{userPokemon.Name} fainted.");
+                Console.WriteLine($"{userTrainer.PokemonOut.Name} fainted.");
             }
         }
 
         public static void FightTrainer(PokemonTrainer userTrainer, PokemonTrainer opponentTrainer)
         {
-            Pokemon userPokemon = userTrainer.CaptivePokemons[0];
+            int nextPokemonIndex = 1;
 
-            int opponentPokemonIndex = 0;
-            Pokemon opponent = opponentTrainer.CaptivePokemons[opponentPokemonIndex];
-
-            List<string> menuChoices = new List<string> { "Attack", "Change Popokenom", "Item", "Run"};
+            List<string> menuChoices = new List<string> { "Attack", "Change Popokenom", "Item", "Run" };
 
             while (!opponentTrainer.AllPokemonsFainted() && !userTrainer.AllPokemonsFainted())
             {
-                if (userPokemon.Hp <= 0) { ChangePokemon(userPokemon, userTrainer); }
-                if (opponent.Hp <= 0)
+                if (userTrainer.PokemonOut.Hp <= 0) { ChangePokemon(userTrainer, false); }
+                if (opponentTrainer.PokemonOut.Hp <= 0)
                 {
-                    Console.WriteLine($"{opponent.Name} fainted.");
-                    Console.WriteLine($"{userPokemon.Name} gained {userPokemon.GainExp(opponent)} EXP!");
-                    opponentTrainer.SwapPokemons(opponentPokemonIndex, ++opponentPokemonIndex);
+                    Console.WriteLine($"{opponentTrainer.PokemonOut.Name} fainted.");
+                    Console.WriteLine($"{userTrainer.PokemonOut.Name} gained {userTrainer.PokemonOut.GainExp(opponentTrainer.PokemonOut)} EXP!");
+                    opponentTrainer.SwapPokemons(0, nextPokemonIndex++);
 
                 }
 
@@ -74,7 +70,7 @@ namespace PokemonApp
                 switch (userInputIndex)
                 {
                     case 0:
-                        Attack(userPokemon, opponent);
+                        Attack(userTrainer.PokemonOut, opponentTrainer.PokemonOut);
                         break;
                     case 1:
                         Pokemon initialPokemon = userTrainer.PokemonOut;
@@ -83,18 +79,18 @@ namespace PokemonApp
                         OpponentMightAttack(userTrainer.PokemonOut, opponentTrainer.PokemonOut);
                         break;
                     case 2:
-                        InteractWithItems(userPokemon, userTrainer, opponent);
+                        InteractWithItems(userTrainer.PokemonOut, userTrainer, opponentTrainer.PokemonOut);
                         break;
                     case 3:
                         Console.WriteLine($"{opponentTrainer.Name}: You can't run away from me, {userTrainer.Name}.");
                         break;
                 }
-            
+
             }
             if (opponentTrainer.AllPokemonsFainted())
             {
-                Console.Write($"{opponent.Name}: I'll have you next time.");
-                userTrainer.Money += (int)Math.Pow(opponent.Level*8, 2);
+                Console.Write($"{opponentTrainer.PokemonOut.Name}: I'll have you next time.");
+                userTrainer.Money += (int)Math.Pow(opponentTrainer.PokemonOut.Level * 8, 2);
             }
 
         }
@@ -135,11 +131,10 @@ namespace PokemonApp
             int userInputIndex = Menu.GetUserInputIndex(userChoices, cancel);
 
             if (userInputIndex == -1) { return; }
-            Console.WriteLine($"Come back {userPokemon.Name}.");
+            Console.WriteLine($"Come back {userTrainer.PokemonOut.Name}.");
 
-            userTrainer.SwapPokemons(0, userInputIndex);
-            userPokemon = userTrainer.CaptivePokemons[userInputIndex + 1]; // Add one because current pokemon on field is not counted.
-            Console.WriteLine($"I choose you, {userPokemon.Name}.");
+            userTrainer.SwapPokemons(0, userInputIndex + 1);
+            Console.WriteLine($"I choose you, {userTrainer.PokemonOut.Name}.");
         }
 
         public static void InteractWithItems(Pokemon userPokemon, PokemonTrainer userTrainer, Pokemon opponent)
