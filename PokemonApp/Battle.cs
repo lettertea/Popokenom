@@ -16,7 +16,7 @@ namespace PokemonApp
             List<string> menuChoices = new List<string> { "Attack", "Change Popokenom", "Item", "Run" };
             while (opponent.Hp > 0 && !userTrainer.AllPokemonsFainted())
             {
-                if (userPokemon.Hp <= 0) { ChangePokemon(userPokemon, userTrainer); }
+                if (userTrainer.PokemonOut.Hp <= 0) { ChangePokemon(userTrainer, false); }
 
                 int userInputIndex = Menu.GetUserInputIndex(menuChoices, false);
                 switch (userInputIndex)
@@ -25,8 +25,10 @@ namespace PokemonApp
                         Attack(userPokemon, opponent);
                         break;
                     case 1:
-                        ChangePokemon(userPokemon, userTrainer);
-                        OpponentMightAttack(userPokemon, opponent);
+                        Pokemon initialPokemon = userTrainer.PokemonOut;
+                        ChangePokemon(userTrainer, true);
+                        if (initialPokemon == userTrainer.PokemonOut) { break; }
+                        OpponentMightAttack(userTrainer.PokemonOut, opponent);
                         break;
                     case 2:
                         InteractWithItems(userPokemon, userTrainer, opponent);
@@ -75,8 +77,10 @@ namespace PokemonApp
                         Attack(userPokemon, opponent);
                         break;
                     case 1:
-                        ChangePokemon(userPokemon, userTrainer);
-                        OpponentMightAttack(userPokemon, opponent);
+                        Pokemon initialPokemon = userTrainer.PokemonOut;
+                        ChangePokemon(userTrainer, true);
+                        if (initialPokemon == userTrainer.PokemonOut) { break; }
+                        OpponentMightAttack(userTrainer.PokemonOut, opponentTrainer.PokemonOut);
                         break;
                     case 2:
                         InteractWithItems(userPokemon, userTrainer, opponent);
@@ -119,7 +123,7 @@ namespace PokemonApp
             }
         }
 
-        public static void ChangePokemon(Pokemon userPokemon, PokemonTrainer userTrainer)
+        public static void ChangePokemon(PokemonTrainer userTrainer, bool cancel)
         {
             List<string> userChoices = new List<string>();
             for (int i = 1; i < userTrainer.CaptivePokemons.Count; i++)
@@ -128,7 +132,7 @@ namespace PokemonApp
                 userChoices.Add($"{pokemon.Name} - Level: {pokemon.Level}, Hp: {pokemon.Hp}");
             }
 
-            int userInputIndex = Menu.GetUserInputIndex(userChoices, true);
+            int userInputIndex = Menu.GetUserInputIndex(userChoices, cancel);
 
             if (userInputIndex == -1) { return; }
             Console.WriteLine($"Come back {userPokemon.Name}.");
