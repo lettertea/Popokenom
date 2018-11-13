@@ -44,11 +44,11 @@ namespace PokemonApp
 
         public static string GetNonMagikarpPokemon()
         {
-            string randomPokemonName = PokemonStore.GetRandomPokemon();
+            string randomPokemonName = Pokemons.GetRandomPokemon();
             // Makes sure no more Magikarps are added
             while (randomPokemonName == "Magikarp")
             {
-                randomPokemonName = PokemonStore.GetRandomPokemon();
+                randomPokemonName = Pokemons.GetRandomPokemon();
             }
             return randomPokemonName;
         }
