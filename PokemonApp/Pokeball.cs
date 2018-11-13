@@ -15,7 +15,7 @@ namespace PokemonApp
             this.Effectiveness = effectiveness;
         }
 
-        public override void Use(ref Pokemon opponent, ref PokemonTrainer userTrainer)
+        public override void Use(Pokemon opponent, PokemonTrainer userTrainer)
         {
             if (userTrainer.CaptivePokemons.Count >= 6 )
             {

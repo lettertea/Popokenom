@@ -39,7 +39,7 @@ namespace PokemonApp
         }
 
 
-        public int Attack(ref Pokemon opponent) => opponent.Hp -= this.BaseAttack;
+        public int Attack(Pokemon opponent) => opponent.Hp -= this.BaseAttack;
 
 
         public int GainExp(Pokemon opponent)

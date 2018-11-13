@@ -15,7 +15,7 @@ namespace PokemonApp
             this.Price = price;
         }
 
-        public abstract void Use(ref Pokemon pokemon, ref PokemonTrainer userTrainer);
+        public abstract void Use(Pokemon pokemon, PokemonTrainer userTrainer);
 
     }
 }

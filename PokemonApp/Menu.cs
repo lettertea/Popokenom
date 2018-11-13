@@ -43,7 +43,7 @@ namespace PokemonApp
                     {
                         Pokemon opponent = new Pokemon(PokemonStore.GetRandomPokemon(), opponentLevel);
                         Console.WriteLine($"A wild {opponent.Name} appeared.");
-                        Battle.FightPokemon(ref userPokemons, ref opponent);
+                        Battle.FightPokemon(userPokemons, opponent);
                         break;
                     }
                 }
