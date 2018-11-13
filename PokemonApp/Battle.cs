@@ -48,10 +48,54 @@ namespace PokemonApp
             }
         }
 
+        public static void FightTrainer(PokemonTrainer userTrainer, PokemonTrainer opponentTrainer)
+        {
+            Pokemon userPokemon = userTrainer.CaptivePokemons[0];
+
+            int opponentPokemonIndex = 0;
+            Pokemon opponent = opponentTrainer.CaptivePokemons[opponentPokemonIndex];
+
+            List<string> menuChoices = new List<string> { "Attack", "Change Popokenom", "Item", "Run"};
+
+            while (!opponentTrainer.AllPokemonsFainted() && !userTrainer.AllPokemonsFainted())
+            {
+                if (userPokemon.Hp <= 0) { ChangePokemon(userPokemon, userTrainer); }
+                if (opponent.Hp <= 0)
+                {
+                    Console.WriteLine($"{opponent.Name} fainted.");
+                    Console.WriteLine($"{userPokemon.Name} gained {userPokemon.GainExp(opponent)} EXP!");
+                    opponentTrainer.SwapPokemons(opponentPokemonIndex, ++opponentPokemonIndex);
 
                 }
 
-        public static void Attack(ref Pokemon userPokemon, ref Pokemon opponent)
+                int userInputIndex = Menu.GetUserInputIndex(menuChoices, false);
+                switch (userInputIndex)
+                {
+                    case 0:
+                        Attack(userPokemon, opponent);
+                        break;
+                    case 1:
+                        ChangePokemon(userPokemon, userTrainer);
+                        OpponentMightAttack(userPokemon, opponent);
+                        break;
+                    case 2:
+                        InteractWithItems(userPokemon, userTrainer, opponent);
+                        break;
+                    case 3:
+                        Console.WriteLine($"{opponentTrainer.Name}: You can't run away from me, {userTrainer.Name}.");
+                        break;
+                }
+            
+            }
+            if (opponentTrainer.AllPokemonsFainted())
+            {
+                Console.Write($"{opponent.Name}: I'll have you next time.");
+                userTrainer.Money += (int)Math.Pow(opponent.Level*8, 2);
+            }
+
+        }
+
+        public static void Attack(Pokemon userPokemon, Pokemon opponent)
         {
             userPokemon.Attack(opponent);
             Console.WriteLine($"{opponent.Name} Hp drops to {opponent.Hp}.");
