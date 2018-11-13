@@ -52,7 +52,6 @@ namespace PokemonApp
 
         public static void ChallengeRival(PokemonTrainer userTrainer)
         {
-            PokemonTrainer rival = new RivalTrainer("Bary");
             List<string> userChoices = new List<string>();
 
             for (int i = 1; i < 11; i++)
@@ -68,9 +67,9 @@ namespace PokemonApp
             int userInputIndex = Menu.GetUserInputIndex(userChoices, true);
             if (userInputIndex == -1) { return; }
 
-            RivalTrainer.SetRivalPokemons(userTrainer.StarterPokemon, rival, userInputIndex);
-
-
+            RivalTrainer rival = new RivalTrainer("Bary Yoke", userInputIndex + 1);
+            rival.SetPokemons(userTrainer.StarterPokemon);
+            Battle.FightTrainer(userTrainer, rival);
         }
     }
 }

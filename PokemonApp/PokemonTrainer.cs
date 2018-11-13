@@ -27,17 +27,14 @@ namespace PokemonApp
             this.CaptivePokemons[indexB] = cache;
         }
 
-        public static bool AllPokemonsFainted(PokemonTrainer userTrainer)
+        public bool AllPokemonsFainted()
         {
-            foreach (Pokemon userPokemon in userTrainer.CaptivePokemons)
+            foreach (Pokemon userPokemon in this.CaptivePokemons)
             {
                 if (userPokemon.Hp >= 0) { return false; }
             }
             return true;
         }
-
-
-
     }
 
 
