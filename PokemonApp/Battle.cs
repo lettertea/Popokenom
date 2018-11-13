@@ -62,7 +62,9 @@ namespace PokemonApp
                 {
                     Console.WriteLine($"{opponentTrainer.PokemonOut.Name} fainted.");
                     Console.WriteLine($"{userTrainer.PokemonOut.Name} gained {userTrainer.PokemonOut.GainExp(opponentTrainer.PokemonOut)} EXP!");
+                    Console.WriteLine($"{opponentTrainer.Name}: You did well, {opponentTrainer.PokemonOut.Name}.");
                     opponentTrainer.SwapPokemons(0, nextPokemonIndex++);
+                    Console.WriteLine($"{opponentTrainer.Name}: {opponentTrainer.PokemonOut.Name}, let's catch up the slack!");
 
                 }
 
@@ -89,7 +91,7 @@ namespace PokemonApp
             }
             if (opponentTrainer.AllPokemonsFainted())
             {
-                Console.Write($"{opponentTrainer.PokemonOut.Name}: I'll have you next time.");
+                Console.Write($"{opponentTrainer.Name}: I'll have you next time.");
                 userTrainer.Money += (int)Math.Pow(opponentTrainer.PokemonOut.Level * 8, 2);
             }
 
