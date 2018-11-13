@@ -143,15 +143,15 @@ namespace PokemonApp
         {
             List<string> userItems = new List<string>();
 
-            for (int i = 0; i < userTrainer.Items.Count; i++)
+            foreach (IItem item in userTrainer.Items)
             {
-                string itemName = userTrainer.Items[i].Name;
-                userItems.Add($"{i + 1}. {itemName}");
+                string itemName = item.Name;
+                userItems.Add(itemName);
             }
             int userInputIndex = Menu.GetUserInputIndex(userItems, true);
 
             if (userInputIndex == -1) { return; }
-            Item itemChosen = userTrainer.Items[userInputIndex];
+            IItem itemChosen = userTrainer.Items[userInputIndex];
             if (itemChosen.PokemonAffected == "user") { userTrainer.Items[userInputIndex].Use(userPokemon, userTrainer); }
             else { userTrainer.Items[userInputIndex].Use(opponent, userTrainer); }
 
