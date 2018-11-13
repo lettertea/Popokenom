@@ -9,9 +9,10 @@ namespace PokemonApp
     class Battle
     {
 
-        public static void Fight(ref PokemonTrainer userTrainer, ref Pokemon opponent)
+        public static void FightPokemon(ref PokemonTrainer userTrainer, ref Pokemon opponent)
         {
             Pokemon userPokemon = userTrainer.CaptivePokemons[0];
+
             List<string> menuChoices = new List<string> { "Attack", "Change Popokenom", "Item", "Run" };
             while (opponent.Hp > 0 && !PokemonTrainer.AllPokemonsFainted(userTrainer))
             {
