@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Drawing;
-using Console = Colorful.Console;
 
 namespace PokemonApp
 {
