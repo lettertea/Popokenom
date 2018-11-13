@@ -4,16 +4,22 @@ using System.Text;
 
 namespace PokemonApp
 {
-    class Potion : Item
+    class Potion : IItem
     {
+
+        public string Name { get; set; }
+        public int Price { get; set; }
         public double HpIncrease { get; set; }
-        public override string PokemonAffected => "user";
-        public Potion(string name, int price, double HpIncrease) : base(name, price)
+        public string PokemonAffected => "user";
+
+        public Potion(string name, int price, double hpIncrease)
         {
-            this.HpIncrease = HpIncrease;
+            this.Name = name;
+            this.Price = price;
+            this.HpIncrease = hpIncrease;
         }
 
-        public override void Use(Pokemon userPokemon, PokemonTrainer userTrainer)
+        public void Use(Pokemon userPokemon, PokemonTrainer userTrainer)
         {
             userTrainer.Items.Remove(this);
             int HpIncreased = (int)Math.Round((userPokemon.MaxHp * this.HpIncrease));

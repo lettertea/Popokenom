@@ -5,17 +5,21 @@ using System.Linq;
 
 namespace PokemonApp
 {
-    class Pokeball : Item
+    class Pokeball : IItem
     {
+        public string Name { get; set; }
+        public int Price { get; set; }
         public double Effectiveness { get; set; }
-        public override string PokemonAffected => "opponent";
+        public string PokemonAffected => "opponent";
 
-        public Pokeball(string name, int price, double effectiveness) : base(name, price)
+        public Pokeball(string name, int price, double effectiveness)
         {
+            this.Name = name;
+            this.Price = price;
             this.Effectiveness = effectiveness;
         }
 
-        public override void Use(Pokemon opponent, PokemonTrainer userTrainer)
+        public void Use(Pokemon opponent, PokemonTrainer userTrainer)
         {
             if (userTrainer.CaptivePokemons.Count >= 6 )
             {
