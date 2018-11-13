@@ -71,5 +71,23 @@ namespace PokemonApp
             rival.SetPokemons(userTrainer.StarterPokemon);
             Battle.FightTrainer(userTrainer, rival);
         }
+        public static void PurchaseItem(PokemonTrainer userTrainer)
+        {
+            Console.WriteLine($"Money: {userTrainer.Money}");
+            List<string> itemChoices = new List<string>();
+            Console.WriteLine("----------------------");
+            Console.WriteLine("Price   |   Name");
+            Console.WriteLine("----------------------");
+
+            foreach (IItem item in ItemStore.Items)
+            {
+                itemChoices.Add(String.Format("{0,-4} | {1,-4}", item.Price, item.Name));
+            }
+            int userInputIndex = Menu.GetUserInputIndex(itemChoices, true);
+
+            if (userInputIndex == -1) { return; }
+            ItemStore.PurchaseItem(userTrainer, userInputIndex);
+
+        }
     }
 }

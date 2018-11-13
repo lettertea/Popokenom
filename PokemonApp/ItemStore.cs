@@ -17,9 +17,17 @@ namespace PokemonApp
         new Potion("Max (Heals 100% of max hp)", 800, 1.0)
     };
 
-        public static void PurchaseItem(PokemonTrainer trainer, int itemChoiceIndex)
+        public static void PurchaseItem(PokemonTrainer userTrainer, int itemChoiceIndex)
         {
-            Item
+            IItem chosenItem = ItemStore.Items[itemChoiceIndex];
+            if (userTrainer.Money < chosenItem.Price)
+            {
+                Console.WriteLine("You don't have enough money.");
+                return;
+            }
+            userTrainer.Money -= chosenItem.Price;
+            Console.WriteLine($"Money: {userTrainer.Money}");
+            userTrainer.Items.Add(chosenItem);
         }
     }
 

@@ -21,7 +21,9 @@ namespace PokemonApp
                 case 1:
                     Menu.ChallengeRival(userTrainer);
                     break;
-                
+                case 2:
+                    Menu.PurchaseItem(userTrainer);
+                    break;
             }
 
         }
@@ -54,5 +56,7 @@ namespace PokemonApp
             userTrainer.CaptivePokemons.Add(new Pokemon(pokemonChosen, 1));
             Console.WriteLine($"Congratulations! {pokemonChosen} joined your party.");
         }
+
+
     }   
 }
