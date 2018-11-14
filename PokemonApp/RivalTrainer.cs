@@ -7,6 +7,8 @@ namespace PokemonApp
     class RivalTrainer : PokemonTrainer
     {
         public int Level { get; set; }
+        public int MoneyRewarded => (int)Math.Pow(this.Level * 8, 2);
+        
         public RivalTrainer(string name, int level) : base(name)
         {
             this.Name = name;

@@ -91,10 +91,10 @@ namespace PokemonApp
             }
             if (opponentTrainer.AllPokemonsFainted())
             {
-                Console.Write($"{opponentTrainer.Name}: I'll have you next time.");
-                userTrainer.Money += (int)Math.Pow(opponentTrainer.PokemonOut.Level * 8, 2);
+                Console.WriteLine($"{opponentTrainer.Name}: I'll have you next time.");
+                userTrainer.Money += opponentTrainer.MoneyRewarded;
+                Console.WriteLine($"{userTrainer.Name} earned ${opponentTrainer.MoneyRewarded}.");
             }
-
         }
 
         public static void Attack(Pokemon userPokemon, Pokemon opponent)
