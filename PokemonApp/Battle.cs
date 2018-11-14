@@ -15,7 +15,7 @@ namespace PokemonApp
             List<string> menuChoices = new List<string> { "Attack", "Change Popokenom", "Item", "Run" };
             while (opponent.Hp > 0 && !userTrainer.AllPokemonsFainted())
             {
-                if (userTrainer.PokemonOut.Hp <= 0) { ChangePokemon(userTrainer, false); }
+                if (userTrainer.PokemonOut.Hp == 0) { ChangePokemon(userTrainer, false); }
 
                 int userInputIndex = Menu.GetUserInputIndex(menuChoices, false);
                 switch (userInputIndex)
@@ -31,6 +31,8 @@ namespace PokemonApp
                         break;
                     case 2:
                         InteractWithItems(userTrainer.PokemonOut, userTrainer, opponent);
+                        // Opponent faints when it fails to break out of Pokeball.
+                        if (opponent.Hp == 0) { return; }
                         break;
                     case 3:
                         if (Run(userTrainer.PokemonOut, opponent)) { return; };
@@ -38,10 +40,10 @@ namespace PokemonApp
                 }
 
             }
-            if (opponent.Hp <= 0)
+            if (opponent.Hp == 0)
             {
                 Console.WriteLine($"{opponent.Name} fainted.");
-                Console.WriteLine($"{userTrainer.PokemonOut.Name} gained {userTrainer.PokemonOut.GainExp(opponent)} EXP!");
+                userTrainer.PokemonOut.GainExp(opponent.ExpReleased);
             }
             else
             {
@@ -49,7 +51,7 @@ namespace PokemonApp
             }
         }
 
-        public static void FightTrainer(PokemonTrainer userTrainer, PokemonTrainer opponentTrainer)
+        public static void FightTrainer(PokemonTrainer userTrainer, RivalTrainer opponentTrainer)
         {
             int nextPokemonIndex = 1;
 
@@ -57,11 +59,11 @@ namespace PokemonApp
 
             while (!opponentTrainer.AllPokemonsFainted() && !userTrainer.AllPokemonsFainted())
             {
-                if (userTrainer.PokemonOut.Hp <= 0) { ChangePokemon(userTrainer, false); }
-                if (opponentTrainer.PokemonOut.Hp <= 0)
+                if (userTrainer.PokemonOut.Hp == 0) { ChangePokemon(userTrainer, false); }
+                if (opponentTrainer.PokemonOut.Hp == 0)
                 {
                     Console.WriteLine($"{opponentTrainer.PokemonOut.Name} fainted.");
-                    Console.WriteLine($"{userTrainer.PokemonOut.Name} gained {userTrainer.PokemonOut.GainExp(opponentTrainer.PokemonOut)} EXP!");
+                    userTrainer.PokemonOut.GainExp(opponentTrainer.PokemonOut.ExpReleased);
                     Console.WriteLine($"{opponentTrainer.Name}: You did well, {opponentTrainer.PokemonOut.Name}.");
                     opponentTrainer.SwapPokemons(0, nextPokemonIndex++);
                     Console.WriteLine($"{opponentTrainer.Name}: {opponentTrainer.PokemonOut.Name}, let's catch up the slack!");
@@ -101,7 +103,7 @@ namespace PokemonApp
         {
             userPokemon.Attack(opponent);
             Console.WriteLine($"{opponent.Name} Hp drops to {opponent.Hp}.");
-            if (opponent.Hp <= 0) { return; }
+            if (opponent.Hp == 0) { return; }
             opponent.Attack(userPokemon);
             Console.WriteLine($"{userPokemon.Name} Hp drops to {userPokemon.Hp}.");
         }

@@ -31,7 +31,7 @@ namespace PokemonApp
         {
             foreach (Pokemon userPokemon in this.CaptivePokemons)
             {
-                if (userPokemon.Hp >= 0) { return false; }
+                if (userPokemon.Hp > 0) { return false; }
             }
             return true;
         }
