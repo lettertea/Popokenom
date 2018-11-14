@@ -8,7 +8,17 @@ namespace PokemonApp
     {
         public double Rarity { get; private set; }
         public string Name { get; set; }
-        public int Hp { get; set; }
+        private int _hp;
+        public int Hp
+        {
+            get { return _hp; }
+            set
+            {
+                if (value < 0) { _hp = 0; }
+                else if (value > this.MaxHp) { _hp = this.MaxHp; }
+                else { _hp = value; }
+            }
+        }
         private int _level;
         public int Level
         {
