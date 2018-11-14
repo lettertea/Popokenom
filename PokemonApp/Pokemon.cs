@@ -52,14 +52,14 @@ namespace PokemonApp
         public int Attack(Pokemon opponent) => opponent.Hp -= this.BaseAttack;
 
 
-        public int GainExp(Pokemon opponent)
+        public void GainExp(int expGained)
         {
-            this.Exp += opponent.ExpReleased;
+            this.Exp += expGained;
+            Console.WriteLine($"{this.Name} gained {expGained} EXP.");
             while (this.Exp >= this.ExpToLevel)
             {
                 this.LevelUp();
             }
-            return opponent.ExpReleased;
         }
 
         public void LevelUp()
@@ -68,7 +68,7 @@ namespace PokemonApp
             {
                 this.Exp -= this.ExpToLevel;
                 this.Level++;
-                Console.WriteLine($"Leveled up! {this.Name} is level {this.Level}.");
+                Console.WriteLine($"{this.Name} Leveled up to {this.Level}!");
             }
         }
 

@@ -31,8 +31,8 @@ namespace PokemonApp
             Random rand = new Random();
             if (captureProbability * this.Effectiveness >= rand.NextDouble()) {
                 userTrainer.CaptivePokemons.Add(opponent);
+                Console.WriteLine($"{opponent.Name} fainted while trying to break out.");
                 Console.WriteLine($"{opponent.Name} has been caught!");
-                Console.Write("While trying to break out, ");
                 opponent.Hp = 0;
                 return;
             }
