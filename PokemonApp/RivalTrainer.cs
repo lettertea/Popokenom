@@ -29,7 +29,7 @@ namespace PokemonApp
             if (userStarterPokemon == "Bulbasaur") { this.CaptivePokemons.Add(new Pokemon("Charmander", pokemonLevel)); }
             else if (userStarterPokemon == "Charmander") { this.CaptivePokemons.Add(new Pokemon("Squirtle", pokemonLevel)); }
             else { this.CaptivePokemons.Add(new Pokemon("Bulbasaur", pokemonLevel)); }
-
+            this.StarterPokemon = this.CaptivePokemons[0].Name;
 
             if (this.Level == 9)
             {
