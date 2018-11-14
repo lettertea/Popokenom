@@ -13,6 +13,14 @@ namespace PokemonApp
             this.Level = level;
         }
 
+        public void Introduction(PokemonTrainer userTrainer)
+        {
+            Console.WriteLine($"{this.Name}: I've been waiting to battle you ever since you took my Popokénom, {userTrainer.Name}.");
+            Console.WriteLine($"{this.Name}: I was supposed to get {userTrainer.StarterPokemon}, but Grandpa gave the last one to some stranger.");
+            Console.WriteLine($"{this.Name}: That's okay because {this.StarterPokemon} and I have been getting along.");
+            Console.WriteLine($"{this.Name}: Prepare for battle!");
+        }
+
         public void SetPokemons(string userStarterPokemon)
         {
             int pokemonLevel = (this.Level + 1) * 10;

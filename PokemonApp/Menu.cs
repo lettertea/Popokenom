@@ -69,6 +69,7 @@ namespace PokemonApp
 
             RivalTrainer rival = new RivalTrainer("Bary Yoke", userInputIndex + 1);
             rival.SetPokemons(userTrainer.StarterPokemon);
+            rival.Introduction(userTrainer);
             Battle.FightTrainer(userTrainer, rival);
         }
         public static void PurchaseItem(PokemonTrainer userTrainer)
