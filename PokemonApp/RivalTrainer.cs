@@ -6,7 +6,7 @@ namespace PokemonApp
 {
     class RivalTrainer : PokemonTrainer
     {
-        public int Level { get; set; }
+        public int Level { get; }
         public int MoneyRewarded => (int)Math.Pow(this.Level * 8, 2);
         
         public RivalTrainer(string name, int level) : base(name)
@@ -25,7 +25,7 @@ namespace PokemonApp
 
         public void SetPokemons(string userStarterPokemon)
         {
-            int pokemonLevel = (this.Level + 1) * 10;
+            int pokemonLevel = this.Level * 10;
 
             // Set starter pokemon
             if (userStarterPokemon == "Bulbasaur") { this.CaptivePokemons.Add(new Pokemon("Charmander", pokemonLevel)); }
