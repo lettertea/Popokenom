@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace PokemonApp
 {
+    [Serializable]
     class Pokeball : IItem
     {
         public string Name { get; set; }

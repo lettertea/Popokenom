@@ -4,6 +4,7 @@ using System.Text;
 
 namespace PokemonApp
 {
+    [Serializable]
     class Potion : IItem
     {
 

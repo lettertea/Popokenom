@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Globalization;
 
+using System.IO;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading.Tasks;
+
 namespace PokemonApp
 {
     class Menu
@@ -89,6 +95,23 @@ namespace PokemonApp
             if (userInputIndex == -1) { return; }
             ItemStore.PurchaseItem(userTrainer, userInputIndex);
 
+        }
+
+        public static void Save(PokemonTrainer userTrainer)
+        {
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(System.AppDomain.CurrentDomain.BaseDirectory + @"\saves.bin", FileMode.Create, FileAccess.Write, FileShare.None);
+            formatter.Serialize(stream, userTrainer);
+            stream.Close();
+        }
+
+        public static PokemonTrainer Load()
+        {
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(System.AppDomain.CurrentDomain.BaseDirectory + @"\saves.bin", FileMode.Open, FileAccess.Read);
+            PokemonTrainer userTrainer = (PokemonTrainer)formatter.Deserialize(stream);
+            stream.Close();
+            return userTrainer;
         }
     }
 }

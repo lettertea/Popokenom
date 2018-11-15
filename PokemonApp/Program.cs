@@ -7,11 +7,22 @@ namespace PokemonApp
     {
         static void Main(string[] args)
         {
-            PokemonTrainer userTrainer = new PokemonTrainer(GetUserName());
-            IntroduceGame(userTrainer);
-            GetStarterPokemon(userTrainer);
-            userTrainer.CaptivePokemons.Add(new Pokemon("Hia", 32));
-            List<string> menuChoices = new List<string> { "Fight wild Pokemons", "Challenge Rival", "Shop", "Heal", "Save" };
+            PokemonTrainer userTrainer = new PokemonTrainer(null);
+            int titleMenuInput = Menu.GetUserInputIndex(new List<string> { "New Game", "Load" }, false);
+            switch (titleMenuInput)
+            {
+                case 0:
+                    userTrainer = new PokemonTrainer(GetUserName());
+                    IntroduceGame(userTrainer);
+                    GetStarterPokemon(userTrainer);
+                    userTrainer.CaptivePokemons.Add(new Pokemon("Hia", 32));
+                    break;
+                case 1:
+                    userTrainer = Menu.Load();
+                    break;
+            }
+
+            List<string> menuChoices = new List<string> { "Fight wild Pokemons", "Challenge Rival", "Shop", "Save", "Quit" };
             while (true)
             {
                 int userInput = Menu.GetUserInputIndex(menuChoices, false);
@@ -26,6 +37,11 @@ namespace PokemonApp
                     case 2:
                         Menu.PurchaseItem(userTrainer);
                         break;
+                    case 3:
+                        Menu.Save(userTrainer);
+                        break;
+                    case 4:
+                        return;
                 }
             }
         }
