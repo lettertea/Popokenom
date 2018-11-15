@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace PokemonApp
 {
@@ -39,6 +40,7 @@ namespace PokemonApp
         public double CaptureProbability => (double)this.Hp / this.MaxHp;
         public Pokemon(string name, int level)
         {
+            if (!Pokemons.AllPokemons.Contains(name)) { throw new ArgumentException($"{name} is not first generation popokénom."); }
             this.Name = name;
             this.Level = level;
             if (this.Name == "Magikarp") { this.Rarity += .3; }

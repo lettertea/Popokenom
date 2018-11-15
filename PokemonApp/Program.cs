@@ -15,14 +15,13 @@ namespace PokemonApp
                     userTrainer = new PokemonTrainer(GetUserName());
                     IntroduceGame(userTrainer);
                     GetStarterPokemon(userTrainer);
-                    userTrainer.CaptivePokemons.Add(new Pokemon("Hia", 32));
                     break;
                 case 1:
                     userTrainer = Menu.Load();
                     break;
             }
 
-            List<string> menuChoices = new List<string> { "Fight wild Pokemons", "Challenge Rival", "Shop", "Save", "Quit" };
+            List<string> menuChoices = new List<string> { "Fight wild a Popokénom", "Challenge Rival", "Shop", "Save", "Quit" };
             while (true)
             {
                 int userInput = Menu.GetUserInputIndex(menuChoices, false);
