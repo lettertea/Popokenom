@@ -36,6 +36,9 @@ namespace PokemonApp
             }
             return true;
         }
+
+        public void HeallAllPokemons() => this.CaptivePokemons.ForEach(pokemon => pokemon.Hp = pokemon.MaxHp);
+
     }
 
 
