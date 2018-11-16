@@ -13,7 +13,7 @@ namespace PokemonApp
         public string StarterPokemon { get; set; }
 
         public string Name { get; set; }
-        public int Money { get; set; } = 2000;
+        public int Money { get; set; };
         public List<IItem> Items { get; } = new List<IItem>();
 
         public PokemonTrainer (string Name)

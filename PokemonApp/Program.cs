@@ -21,7 +21,6 @@ namespace PokemonApp
                     break;
             }
 
-            userTrainer.CaptivePokemons.Add(new Pokemon(Pokemons.GetRandomPokemon(), 10));
             List<string> menuChoices = new List<string> { "Fight wild a Popokénom", "Challenge Rival", "Shop", "Save", "Quit" };
             while (true)
             {
