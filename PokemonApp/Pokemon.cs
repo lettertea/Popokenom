@@ -44,6 +44,7 @@ namespace PokemonApp
             this.Name = name;
             this.Level = level;
             if (this.Name == "Magikarp") { this.Rarity += .3; }
+            if (Pokemons.StarterPokemons.Contains(name)) { this.Rarity = 1.3; } 
             this.Hp = this.MaxHp;
         }
 
