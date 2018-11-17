@@ -9,6 +9,7 @@ namespace PokemonApp
         {
             PokemonTrainer userTrainer = new PokemonTrainer(null);
             int titleMenuInput = Menu.GetUserInputIndex(new List<string> { "New Game", "Load" }, false);
+
             switch (titleMenuInput)
             {
                 case 0:
@@ -67,10 +68,9 @@ namespace PokemonApp
         {
             Console.WriteLine("Choose your starter popokénom!");
             Console.WriteLine();
-            List<string> starterPokemons = new List<string> { "Bulbasaur", "Charmander", "Squirtle" };
 
-            int userInputIndex = Menu.GetUserInputIndex(starterPokemons, false);
-            string pokemonChosen = starterPokemons[userInputIndex];
+            int userInputIndex = Menu.GetUserInputIndex(Pokemons.StarterPokemons, false);
+            string pokemonChosen = Pokemons.StarterPokemons[userInputIndex];
 
             userTrainer.StarterPokemon = pokemonChosen;
             userTrainer.CaptivePokemons.Add(new Pokemon(pokemonChosen, 1));
