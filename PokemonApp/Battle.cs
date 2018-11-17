@@ -57,6 +57,7 @@ namespace PokemonApp
 
             List<string> menuChoices = new List<string> { "Attack", "Change Popokenom", "Item", "Run" };
 
+            Console.WriteLine($"{opponentTrainer.Name}: My {opponentTrainer.StarterPokemon} will beat your {userTrainer.StarterPokemon} for sure.");
             while (!opponentTrainer.AllPokemonsFainted() && !userTrainer.AllPokemonsFainted())
             {
                 if (userTrainer.PokemonOut.Hp == 0) { ChangePokemon(userTrainer, false); }

@@ -37,7 +37,7 @@ namespace PokemonApp
             } while (true);
         }
 
-        public static void FightWildPokemon(PokemonTrainer userPokemons)
+        public static void FightWildPokemon(PokemonTrainer userTrainer)
         {
             int opponentLevel;
             do
@@ -48,8 +48,9 @@ namespace PokemonApp
                     if (opponentLevel >= 1 && opponentLevel <= 100)
                     {
                         Pokemon opponent = new Pokemon(Pokemons.GetRandomPokemon(), opponentLevel);
-                        Console.WriteLine($"A wild {opponent.Name} appeared.");
-                        Battle.FightPokemon(userPokemons, opponent);
+                        Console.WriteLine($"A wild {opponent.Name} (R:{opponent.Rarity}) appeared.");
+                        Console.WriteLine($"{userTrainer.Name}: Alright, let's show 'em what we got, {userTrainer.PokemonOut.Name} (R:{userTrainer.PokemonOut.Rarity})");
+                        Battle.FightPokemon(userTrainer, opponent);
                         break;
                     }
                 }
